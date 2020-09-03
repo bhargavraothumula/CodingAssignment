@@ -1,0 +1,28 @@
+<div class="jumbotron" *ngIf="quizQuestionsList && quizQuestionsList.length && !isQuizCompleted">
+  <h1>Total Questions {{currentQuestionNumber +1}} out of {{totalQuestionsCount}}</h1>
+   <ul>
+      {{question}}
+   </ul>
+   <ul *ngFor="let opt of options;let indexOfelement=index;">
+      <div class="checkbox">
+         <label>
+          <input class="form-check-input" value="indexOfelement" type="radio" name="option"   (click)="checkCorrectAnswer($event,opt)">
+         {{opt}}
+         <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+         </label>
+      </div>
+   </ul>
+   <h3 *ngIf="optionSelected"> {{isAnswerCorrect ? correctAnswerString : inCorrectAnswerString}} </h3>
+   <h3 *ngIf="optionSelected && !isAnswerCorrect"> Correct Answer is: {{correctAnswer}} </h3>
+   <button [disabled]="!this.currentQuestionNumber" (click)="getPreviousQuestion()" >previous</button>
+   <button [disabled]="isNextButtonDisabled" (click)="getNextQuestion()">next</button>
+</div>
+
+<div class="jumbotron" *ngIf="isQuizCompleted">
+  <h1>Thank you,Resutls are</h1>
+  <h2>Out of {{totalQuestionsCount}}, {{resultList.length}} are correct </h2> 
+  <button (click)="startAgain()">startAgain</button>
+
+</div>
+
+
